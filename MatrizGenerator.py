@@ -38,7 +38,5 @@ def gerar_matriz():
             print("Matriz não quadratica, não possui determinante.")
     except ValueError:
         print("Valor não aceito, por favor inserir um válido.")
-# gerar_matriz()
+gerar_matriz()
 
-for i in range(0,200,10):
-    print(i)
