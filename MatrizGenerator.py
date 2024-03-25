@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def gerar_matriz():
     try:
         #escolhe a ordem da matriz no formato NumeroXNumero, parte a string no x e pega o primeiro elemento
@@ -17,8 +16,17 @@ def gerar_matriz():
         
             for j in range(colunas):
                 #e com essa notacao vai substituindo os elementos nos respectivos lugares
-                #adicionei o metodo eval, que se for digitado 2/3 pelo usuario, ele vai realizar a divisao e colocar no elemento corretamente
-                    matriz[i][j] = (eval(input(f"Digite o {j+1} elemento da {i+1} linha: ")))
+                #looping infinito ate que o valor seja valido
+                while True:
+                    try:
+                         matriz[i][j] = (eval(input(f"Digite o {j+1} elemento da {i+1} linha: ")))
+                         break
+                    #exceção para divisão por 0
+                    except ZeroDivisionError:
+                        print("Divisão por 0 não é aceita.")
+                    #exceção para digito inválido
+                    except (SyntaxError, NameError, TypeError):
+                        print("Entrada inválida, digite novamente.")
 
         print(f"A matriz gerada de ordem {linhas}x{colunas} é:  \n{matriz}\n ") 
             #verifica se a matriz eh quadratica
@@ -35,8 +43,7 @@ def gerar_matriz():
             except np.linalg.LinAlgError:
                 print(f"A matriz é singular, não possui inversa, pois o determinante é igual a 0.")
         else:
-            print("Matriz não quadratica, não possui determinante.")
+            print("Matriz não quadratica, não possui determinante e nem inversa.")
     except ValueError:
         print("Valor não aceito, por favor inserir um válido.")
 gerar_matriz()
-
